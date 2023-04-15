@@ -8,12 +8,219 @@
 
   /*[data-theme='light'] { */
   :root {
-    --color-background-primary: #187183;
+    --color-primary: #187183;
+
+    /* ######### Red ######### */
+    --color-red-100: #ff0e00;
+    --color-red-80: #ff3e33;
+    --color-red-60: #ff6e66;
+    --color-red-40: #ff9e99;
+    --color-red-20: #ffcfcc;
+    --color-red-10: #ffe7e6;
+    --color-red-05: #fff3f2;
+
+    /* ######### Green ######### */
+    --color-green-100: #34c759;
+    --color-green-80: #5dd27a;
+    --color-green-60: #85dd9b;
+    --color-green-40: #aee9bd;
+    --color-green-20: #d6f4de;
+    --color-green-10: #ebfaef;
+    --color-green-05: #f5fcf6;
+
+    /* ######### Yellow ######### */
+    --color-yellow-100: #ffcc00;
+    --color-yellow-80: #ffd633;
+    --color-yellow-60: #ffe066;
+    --color-yellow-40: #ffeb99;
+    --color-yellow-20: #fff5cc;
+    --color-yellow-10: #fffae6;
+    --color-yellow-05: #fffcf2;
+
+    /* ######### Orange ######### */
+    --color-orange-100: #ff9500;
+    --color-orange-80: #ffaa33;
+    --color-orange-60: #ffbf66;
+    --color-orange-40: #ffd599;
+    --color-orange-20: #ffeacc;
+    --color-orange-10: #fff5e6;
+    --color-orange-05: #fff9f2;
+
+    /* ######### Blue ######### */
+    --color-blue-100: #007aff;
+    --color-blue-80: #3395ff;
+    --color-blue-60: #66afff;
+    --color-blue-40: #99caff;
+    --color-blue-20: #cce4ff;
+    --color-blue-10: #e6f2ff;
+    --color-blue-05: #f2f8ff;
+
+    /* ######### Teal ######### */
+    --color-teal-100: #5ac8fa;
+    --color-teal-80: #7bd3fb;
+    --color-teal-60: #9cdefc;
+    --color-teal-40: #bde9fd;
+    --color-teal-20: #def4fe;
+    --color-teal-10: #effaff;
+    --color-teal-05: #f6fcfe;
+
+    /* ######### Indigo ######### */
+    --color-indigo-100: #5856d6;
+    --color-indigo-80: #7978de;
+    --color-indigo-60: #9b9ae6;
+    --color-indigo-40: #bcbbef;
+    --color-indigo-20: #deddf7;
+    --color-indigo-10: #efeffb;
+    --color-indigo-05: #f6f6fd;
+
+    /* ######### Purple ######### */
+    --color-purple-100: #af52de;
+    --color-purple-80: #bf75e5;
+    --color-purple-60: #cf97eb;
+    --color-purple-40: #dfbaf2;
+    --color-purple-20: #efdcf8;
+    --color-purple-10: #f7eefc;
+    --color-purple-05: #fbf6fd;
+
+    --color-fg-default: #24292f;
+    --color-border-muted: #d8dee4;
   }
 
   /* $$$$$$$$$$$$$$$$$ DARK $$$$$$$$$$$$$$$$$ */
   /* [data-theme='dark'] { */
   .dark {
-    
+    --color-primary: #187183;
+
+    /* ######### Red ######### */
+    --color-red-100: #ff0e00;
+    --color-red-80: #ff3e33;
+    --color-red-60: #ff6e66;
+    --color-red-40: #ff9e99;
+    --color-red-20: #ffcfcc;
+    --color-red-10: #ffe7e6;
+    --color-red-05: #fff3f2;
+
+    /* ######### Green ######### */
+    --color-green-100: #34c759;
+    --color-green-80: #5dd27a;
+    --color-green-60: #85dd9b;
+    --color-green-40: #aee9bd;
+    --color-green-20: #d6f4de;
+    --color-green-10: #ebfaef;
+    --color-green-05: #f5fcf6;
+
+    /* ######### Yellow ######### */
+    --color-yellow-100: #ffcc00;
+    --color-yellow-80: #ffd633;
+    --color-yellow-60: #ffe066;
+    --color-yellow-40: #ffeb99;
+    --color-yellow-20: #fff5cc;
+    --color-yellow-10: #fffae6;
+    --color-yellow-05: #fffcf2;
+
+    /* ######### Orange ######### */
+    --color-orange-100: #ff9500;
+    --color-orange-80: #ffaa33;
+    --color-orange-60: #ffbf66;
+    --color-orange-40: #ffd599;
+    --color-orange-20: #ffeacc;
+    --color-orange-10: #fff5e6;
+    --color-orange-05: #fff9f2;
+
+    /* ######### Blue ######### */
+    --color-blue-100: #007aff;
+    --color-blue-80: #3395ff;
+    --color-blue-60: #66afff;
+    --color-blue-40: #99caff;
+    --color-blue-20: #cce4ff;
+    --color-blue-10: #e6f2ff;
+    --color-blue-05: #f2f8ff;
+
+    /* ######### Teal ######### */
+    --color-teal-100: #5ac8fa;
+    --color-teal-80: #7bd3fb;
+    --color-teal-60: #9cdefc;
+    --color-teal-40: #bde9fd;
+    --color-teal-20: #def4fe;
+    --color-teal-10: #effaff;
+    --color-teal-05: #f6fcfe;
+
+    /* ######### Indigo ######### */
+    --color-indigo-100: #5856d6;
+    --color-indigo-80: #7978de;
+    --color-indigo-60: #9b9ae6;
+    --color-indigo-40: #bcbbef;
+    --color-indigo-20: #deddf7;
+    --color-indigo-10: #efeffb;
+    --color-indigo-05: #f6f6fd;
+
+    /* ######### Purple ######### */
+    --color-purple-100: #af52de;
+    --color-purple-80: #bf75e5;
+    --color-purple-60: #cf97eb;
+    --color-purple-40: #dfbaf2;
+    --color-purple-20: #efdcf8;
+    --color-purple-10: #f7eefc;
+    --color-purple-05: #fbf6fd;
+
+    --color-fg-default: #24292f;
+    --color-border-muted: #d8dee4;
   }
 }
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar-mobile {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  margin-left: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-button {
+    background-color: rgb(245, 245, 245);
+    /* margin: 5px 5px 5px 0px; */
+    padding: 15px 10px;
+    appearance: none;
+    border-radius: 6px;
+    border: 2px solid var(--color-fg-default);
+    color: var(--color-fg-default);
+}
+
+.custom-button-shadow {
+  box-shadow: black 3px 3px;
+}
+
+@media screen and (min-device-width: 767px) {
+  .navbar-mobile {
+    margin-left: -3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media screen and (min-device-width: 1023px) {
+  .navbar-mobile {
+    margin-left: -5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
