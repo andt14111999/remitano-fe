@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  /* $$$$$$$$$$$$$$$$$ LIGHT $$$$$$$$$$$$$$$$$ */
+
+  /*[data-theme='light'] { */
+  :root {
+    --color-background-primary: #187183;
+  }
+
+  /* $$$$$$$$$$$$$$$$$ DARK $$$$$$$$$$$$$$$$$ */
+  /* [data-theme='dark'] { */
+  .dark {
+    
+  }
+}
