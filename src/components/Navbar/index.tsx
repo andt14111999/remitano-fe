@@ -39,26 +39,26 @@ const Navbar = () => {
     <>
       <div className="px-4 py-4 transition-all flex justify-between items-center font-medium border-b border-muted">
         <div className="flex items-center gap-12">
-          <Link to="#">
+          <Link to="/">
             <img
               src={images.logo}
-              alt="IQ Perfetto"
+              alt="Remitano"
               className="w-[3.25rem] md:w-[4rem]"
             />
           </Link>
         </div>
         <div className="flex items-center gap-4 xl:gap-12">
           {isDesktop && (
-            <>
+            <Link to="/login">
               <CustomButton className="custom-button-shadow">
                 Login / Register
               </CustomButton>
-            </>
+            </Link>
           )}
           {!isDesktop && (
             <img
               src="/images/Hamburger.svg"
-              alt="IQ Perfetto"
+              alt="Remitano"
               className="w-[2rem] h-[2rem]"
               onClick={() => {
                 handleOpenSidebar();
@@ -81,13 +81,13 @@ const Navbar = () => {
                     <Link to="#">
                       <img
                         src="/images/Logo.svg"
-                        alt="IQ Perfetto"
+                        alt="Remitano"
                         className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
                       />
                     </Link>
                     <img
                       src="/images/Navbar_Close.svg"
-                      alt="IQ Perfetto"
+                      alt="Remitano"
                       className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
                       onClick={() => {
                         handleCloseSidebar();

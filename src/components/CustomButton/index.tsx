@@ -23,16 +23,12 @@ const CustomButton: FC<CustomButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex justify-center items-center gap-x-[0.625rem] p-2 rounded-lg ${className} custom-button`}
+      className={`flex justify-center items-center gap-x-[0.625rem] p-2 bg-slate-100 rounded-lg px-4 py-2 border-2 border-fg-default text-fg-default shadow-2xl ${className} `}
       type={type}
       onClick={onClick}
     >
-      {icon && <img src={icon} className={iconClassName} alt="Legend Group" />}
-      <p
-        className={`${textClassName} font-bold`}
-      >
-        {children}
-      </p>
+      {icon && <img src={icon} className={iconClassName} alt="Remitano" />}
+      <p className={`${textClassName} font-bold`}>{children}</p>
     </button>
   );
 };

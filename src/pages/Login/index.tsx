@@ -10,18 +10,66 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import APIs from 'apis';
+import axios from 'axios';
+import CustomButton from 'components/CustomButton';
+import { useFormik } from 'formik';
+import { useEnqueueSnackbar } from 'hooks/useEnqueueSnackbar';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'stores/hooks';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(6, 'Password should be of minimum 6 characters length')
+    .max(20, 'Password should be of maximum 20 characters length')
+    .matches(/^[a-zA-Z0-9]{6,20}$/, 'Character or Number only')
+    .required('Password is required'),
+});
 
 const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const enqueueSnackbar = useEnqueueSnackbar();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isInitialized, setIsInitialized] = useState(false);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      const data = {
+        email: values.email,
+        password: values.password,
+      };
+      axios
+        .post(APIs.login, data)
+        .then((res) => {
+          enqueueSnackbar('Register successfully', { variant: 'success' });
+          const token = res.data;
+          if (token) {
+            localStorage.setItem('accessToken', token);
+          }
+          navigate('/');
+        })
+        .catch((err) => {
+          enqueueSnackbar('Register failed', { variant: 'error' });
+        });
+    },
+  });
+
+  // CHECK REDIRECT SEARCH PARAMS
+  useEffect(() => {
+    if (isLoggedIn && isInitialized) navigate('/');
+    setIsInitialized(true);
+  }, [isInitialized, isLoggedIn, navigate])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -36,7 +84,12 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
@@ -46,6 +99,10 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             margin="normal"
@@ -56,15 +113,17 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
-          <Button
+          <CustomButton
+            className="mt-6 mb-4 w-full custom-button-shadow"
             type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
           >
             Sign In
-          </Button>
+          </CustomButton>
           <Grid container>
             <Grid item>
               <Link to="/register">{"Don't have an account? Sign Up"}</Link>

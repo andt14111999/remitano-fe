@@ -16,9 +16,9 @@ const TEXT_COLORS = {
 };
 
 const TITLES = {
-  success: 'Thành công',
-  warning: 'Cảnh báo',
-  error: 'Thất bại',
+  success: 'Success',
+  warning: 'Warning',
+  error: 'Error',
 };
 
 interface CustomSnackbarProps {
@@ -33,7 +33,7 @@ const CustomSnackbar = React.forwardRef<HTMLDivElement, CustomSnackbarProps>(
     return (
       <>
         <div
-          className={`flex items-center justify-between gap-x-3 p-4 rounded-3xl w-[full] md:w-[25rem] transition-all bg-dropdown toast-in-right`}
+          className={`flex items-center justify-between gap-x-3 p-4 rounded-3xl w-[full] md:w-[25rem] shadow-2xl transition-all bg-purple-700 toast-in-right`}
           key={id}
           ref={ref}
         >
@@ -42,7 +42,7 @@ const CustomSnackbar = React.forwardRef<HTMLDivElement, CustomSnackbarProps>(
               <img
                 className="w-8"
                 src={variant && ICONS[variant]}
-                alt="Legend Group"
+                alt="Remitano"
               />
             </div>
             <div>
@@ -51,11 +51,11 @@ const CustomSnackbar = React.forwardRef<HTMLDivElement, CustomSnackbarProps>(
               >
                 {variant && TITLES[variant]}
               </p>
-              <p className="text-ink-80 text-sm">{message}</p>
+              <p className="text-white text-sm font-semibold">{message}</p>
             </div>
           </div>
           <button onClick={closeSnackBar}>
-            <Cancel className="fill-ink-100" />
+            <Cancel className="text-white" />
           </button>
         </div>
       </>
