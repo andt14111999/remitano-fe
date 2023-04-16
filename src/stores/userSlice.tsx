@@ -4,17 +4,16 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 
-interface IUIState {
-  user: Object;
+interface IUserState {
   isLoggedIn: boolean;
 }
 
-const initialState: IUIState = {
-  user: {},
+const initialState: IUserState = {
   isLoggedIn: false,
 };
 
-const updateIsLoggedIn: CaseReducer<IUIState, PayloadAction<boolean>> = (
+
+const updateIsLoggedIn: CaseReducer<IUserState, PayloadAction<boolean>> = (
   state,
   action
 ) => {
@@ -29,6 +28,6 @@ const userSlice = createSlice({
   },
 });
 
-export const uiActions = userSlice.actions;
+export const userActions = userSlice.actions;
 
 export default userSlice;

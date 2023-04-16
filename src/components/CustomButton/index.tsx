@@ -23,7 +23,7 @@ const CustomButton: FC<CustomButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex justify-center items-center gap-x-[0.625rem] p-2 bg-slate-100 rounded-lg px-4 py-2 border-2 border-fg-default text-fg-default shadow-2xl ${className} `}
+      className={`flex justify-center items-center gap-x-[0.625rem] p-2 bg-slate-100 rounded-lg px-4 py-2 border-2 border-fg-default text-fg-default shadow-lg ${className} `}
       type={type}
       onClick={onClick}
     >

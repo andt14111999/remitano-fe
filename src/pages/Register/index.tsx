@@ -18,6 +18,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useEnqueueSnackbar } from '../../hooks/useEnqueueSnackbar';
+import { useAppDispatch } from 'stores/hooks';
+import { userActions } from 'stores/userSlice';
+import setAxiosWithBearer from 'utils/SetAxiosWithBearer';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -26,16 +29,14 @@ const validationSchema = Yup.object({
   password: Yup.string()
     .min(6, 'Password should be of minimum 6 characters length')
     .max(20, 'Password should be of maximum 20 characters length')
-    .matches(
-      /^[a-zA-Z0-9]{6,20}$/,
-      'Character or Number only'
-    )
+    .matches(/^[a-zA-Z0-9]{6,20}$/, 'Character or Number only')
     .required('Password is required'),
 });
 
 const Register = () => {
   const navigate = useNavigate();
-  const enqueueSnackbar = useEnqueueSnackbar()
+  const enqueueSnackbar = useEnqueueSnackbar();
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -46,18 +47,32 @@ const Register = () => {
     onSubmit: (values) => {
       const data = {
         email: values.email,
-        password: values.password
-      }
-      axios.post(APIs.register, data).then(res => {
-        enqueueSnackbar("Register successfully", {variant: 'success'})
-        const token = res.data;
-        if (token) {
-          localStorage.setItem('accessToken', token);
-        }
-        navigate('/')
-      }).catch(err => {
-        enqueueSnackbar('Register failed', { variant: 'error' });
-      });
+        password: values.password,
+      };
+      axios
+        .post(APIs.register, data)
+        .then((res) => {
+          enqueueSnackbar('Register successfully', { variant: 'success' });
+          const token = res.data;
+          if (token) {
+            localStorage.setItem('accessToken', token);
+          }
+          dispatch(userActions.updateIsLoggedIn(true));
+          setAxiosWithBearer(token);
+          navigate('/');
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err?.response?.data) {
+            enqueueSnackbar(`Register failed: ${err.response.data}`, {
+              variant: 'error',
+            });
+          } else {
+            enqueueSnackbar(`Register failed: ${err.message}`, {
+              variant: 'error',
+            });
+          }
+        });
     },
   });
 
@@ -74,7 +89,12 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required

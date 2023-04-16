@@ -17,7 +17,9 @@ import { useFormik } from 'formik';
 import { useEnqueueSnackbar } from 'hooks/useEnqueueSnackbar';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'stores/hooks';
+import { useAppDispatch, useAppSelector } from 'stores/hooks';
+import { userActions } from 'stores/userSlice';
+import setAxiosWithBearer from 'utils/SetAxiosWithBearer';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object({
@@ -37,6 +39,7 @@ const Login = () => {
   const location = useLocation();
   const [isInitialized, setIsInitialized] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -57,10 +60,20 @@ const Login = () => {
           if (token) {
             localStorage.setItem('accessToken', token);
           }
+          dispatch(userActions.updateIsLoggedIn(true));
+          setAxiosWithBearer(token);
           navigate('/');
         })
         .catch((err) => {
-          enqueueSnackbar('Register failed', { variant: 'error' });
+          if (err?.response?.data) {
+            enqueueSnackbar(`Login failed: ${err.response.data}`, {
+              variant: 'error',
+            });
+          } else {
+            enqueueSnackbar(`Login failed: ${err.message}`, {
+              variant: 'error',
+            });
+          }
         });
     },
   });
@@ -69,7 +82,7 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn && isInitialized) navigate('/');
     setIsInitialized(true);
-  }, [isInitialized, isLoggedIn, navigate])
+  }, [isInitialized, isLoggedIn, navigate]);
 
   return (
     <Container component="main" maxWidth="xs">

@@ -6,6 +6,7 @@ import NavbarLayout from 'layout/NavbarLayout';
 const Home = Loader(lazy(() => import('pages/Home')));
 const Login = Loader(lazy(() => import('pages/Login')));
 const Register = Loader(lazy(() => import('pages/Register')));
+const Share = Loader(lazy(() => import('pages/Share')));
 
 export const BaseRoute: RouteObject = {
   path: '/',
@@ -22,6 +23,10 @@ export const BaseRoute: RouteObject = {
     {
       path: '/register',
       element: <Register />,
+    },
+    {
+      path: '/share',
+      element: <Share />,
     },
   ],
 };

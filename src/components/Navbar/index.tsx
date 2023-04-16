@@ -6,6 +6,8 @@ import { createPortal } from 'react-dom';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
 import { useSpring, animated, useTransition, config } from 'react-spring';
+import { useAppDispatch, useAppSelector } from 'stores/hooks';
+import { userActions } from 'stores/userSlice';
 
 const Navbar = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -15,6 +17,8 @@ const Navbar = () => {
       transform: isMobileSidebarOpen ? 'translateX(0%)' : 'translateX(100%)',
     },
   });
+  const isLoggedIn = useAppSelector(state => state.user.isLoggedIn)
+  const dispatch = useAppDispatch();
 
   const isDesktop = useMediaQuery({
     query: '(min-width: 1224px)',
@@ -35,6 +39,11 @@ const Navbar = () => {
     setIsMobileSidebarOpen(false);
   };
 
+  const logout = () => {
+    dispatch(userActions.updateIsLoggedIn(false))
+    localStorage.removeItem('accessToken')
+  }
+
   return (
     <>
       <div className="px-4 py-4 transition-all flex justify-between items-center font-medium border-b border-muted">
@@ -49,11 +58,27 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4 xl:gap-12">
           {isDesktop && (
-            <Link to="/login">
-              <CustomButton className="custom-button-shadow">
-                Login / Register
-              </CustomButton>
-            </Link>
+            <>
+              {isLoggedIn && (
+                <>
+                  <Link to="/share">
+                    <CustomButton>
+                      Share a movie
+                    </CustomButton>
+                  </Link>
+                  <CustomButton className="custom-button-shadow" onClick={logout}>
+                    Logout
+                  </CustomButton>
+                </>
+              )}
+              {!isLoggedIn && (
+                <Link to="/login">
+                  <CustomButton className="custom-button-shadow">
+                    Login / Register
+                  </CustomButton>
+                </Link>
+              )}
+            </>
           )}
           {!isDesktop && (
             <img
