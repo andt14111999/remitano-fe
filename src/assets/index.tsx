@@ -8,6 +8,7 @@ const images = {
     warning: require('./images/Toast_Alert.svg').default,
   },
   hamburger: require('./images/Hamburger.svg').default,
+  navbar_close: require('./images/Navbar_Close.svg').default,
 };
 
 export default images;

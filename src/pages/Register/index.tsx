@@ -21,6 +21,7 @@ import { useEnqueueSnackbar } from '../../hooks/useEnqueueSnackbar';
 import { useAppDispatch } from 'stores/hooks';
 import { userActions } from 'stores/userSlice';
 import setAxiosWithBearer from 'utils/SetAxiosWithBearer';
+import parseJwt from 'utils/ParseJwt';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -57,12 +58,18 @@ const Register = () => {
           if (token) {
             localStorage.setItem('accessToken', token);
           }
-          dispatch(userActions.updateIsLoggedIn(true));
+          const values = parseJwt(token);
+          dispatch(
+            userActions.updateUser({
+              isLoggedIn: true,
+              email: values.email,
+            })
+          );
           setAxiosWithBearer(token);
           navigate('/');
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           if (err?.response?.data) {
             enqueueSnackbar(`Register failed: ${err.response.data}`, {
               variant: 'error',

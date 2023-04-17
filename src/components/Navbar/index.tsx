@@ -17,7 +17,7 @@ const Navbar = () => {
       transform: isMobileSidebarOpen ? 'translateX(0%)' : 'translateX(100%)',
     },
   });
-  const isLoggedIn = useAppSelector(state => state.user.isLoggedIn)
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const isDesktop = useMediaQuery({
@@ -40,9 +40,14 @@ const Navbar = () => {
   };
 
   const logout = () => {
-    dispatch(userActions.updateIsLoggedIn(false))
-    localStorage.removeItem('accessToken')
-  }
+    dispatch(
+      userActions.updateUser({
+        isLoggedIn: false,
+        email: '',
+      })
+    );
+    localStorage.removeItem('accessToken');
+  };
 
   return (
     <>
@@ -59,19 +64,23 @@ const Navbar = () => {
         <div className="flex items-center gap-4 xl:gap-12">
           {isDesktop && (
             <>
-              {isLoggedIn && (
+              {user.isLoggedIn && (
                 <>
+                  {!!user.email && (
+                    <p className="italic">Welcome {user.email}</p>
+                  )}
                   <Link to="/share">
-                    <CustomButton>
-                      Share a movie
-                    </CustomButton>
+                    <CustomButton>Share a movie</CustomButton>
                   </Link>
-                  <CustomButton className="custom-button-shadow" onClick={logout}>
+                  <CustomButton
+                    className="custom-button-shadow"
+                    onClick={logout}
+                  >
                     Logout
                   </CustomButton>
                 </>
               )}
-              {!isLoggedIn && (
+              {!user.isLoggedIn && (
                 <Link to="/login">
                   <CustomButton className="custom-button-shadow">
                     Login / Register
@@ -82,7 +91,7 @@ const Navbar = () => {
           )}
           {!isDesktop && (
             <img
-              src="/images/Hamburger.svg"
+              src={images.hamburger}
               alt="Remitano"
               className="w-[2rem] h-[2rem]"
               onClick={() => {
@@ -105,13 +114,13 @@ const Navbar = () => {
                   <div className="px-6 py-5 flex justify-between border-b border-neutral-300">
                     <Link to="#">
                       <img
-                        src="/images/Logo.svg"
+                        src={images.logo}
                         alt="Remitano"
                         className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
                       />
                     </Link>
                     <img
-                      src="/images/Navbar_Close.svg"
+                      src={images.navbar_close}
                       alt="Remitano"
                       className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
                       onClick={() => {
@@ -120,54 +129,38 @@ const Navbar = () => {
                     />
                   </div>
 
-                  <div className="p-6">
-                    <div className="mb-14 flex flex-col gap-6">
-                      <a
-                        href="#introduction"
-                        className="text-neutral-black tracking-minus-01"
-                        onClick={() => {
-                          handleCloseSidebar();
-                        }}
-                      >
-                        Giới thiệu chung
-                      </a>
-                      <a
-                        href="#interaction"
-                        className="text-neutral-black tracking-minus-01"
-                        onClick={() => {
-                          handleCloseSidebar();
-                        }}
-                      >
-                        Chức năng
-                      </a>
-                      <a
-                        href="#preview"
-                        className="text-neutral-black tracking-minus-01"
-                        onClick={() => {
-                          handleCloseSidebar();
-                        }}
-                      >
-                        Phụ kiện
-                      </a>
-                      <a
-                        href="#dropdown"
-                        className="text-neutral-black tracking-minus-01"
-                        onClick={() => {
-                          handleCloseSidebar();
-                        }}
-                      >
-                        Hướng dẫn sử dụng
-                      </a>
-                      <a
-                        href="#faq"
-                        className="text-neutral-black tracking-minus-01"
-                        onClick={() => {
-                          handleCloseSidebar();
-                        }}
-                      >
-                        FAQ
-                      </a>
-                    </div>
+                  <div className="p-6 flex flex-col gap-6 items-center">
+                    <>
+                      {user.isLoggedIn && (
+                        <>
+                          {!!user.email && (
+                            <p className="italic">Welcome {user.email}</p>
+                          )}
+                          <Link to="/share">
+                            <CustomButton>Share a movie</CustomButton>
+                          </Link>
+                          <CustomButton
+                            className="custom-button-shadow"
+                            onClick={() => {
+                              logout();
+                              handleCloseSidebar();
+                            }}
+                          >
+                            Logout
+                          </CustomButton>
+                        </>
+                      )}
+                      {!user.isLoggedIn && (
+                        <Link to="/login">
+                          <CustomButton
+                            className="custom-button-shadow"
+                            onClick={handleCloseSidebar}
+                          >
+                            Login / Register
+                          </CustomButton>
+                        </Link>
+                      )}
+                    </>
                   </div>
                 </div>
               </div>

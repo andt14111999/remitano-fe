@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'stores/hooks';
 import { userActions } from 'stores/userSlice';
+import parseJwt from 'utils/ParseJwt';
 import setAxiosWithBearer from 'utils/SetAxiosWithBearer';
 import * as Yup from 'yup';
 
@@ -60,7 +61,13 @@ const Login = () => {
           if (token) {
             localStorage.setItem('accessToken', token);
           }
-          dispatch(userActions.updateIsLoggedIn(true));
+          const values = parseJwt(token);
+          dispatch(
+            userActions.updateUser({
+              isLoggedIn: true,
+              email: values.email,
+            })
+          );
           setAxiosWithBearer(token);
           navigate('/');
         })

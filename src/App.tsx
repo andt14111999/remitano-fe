@@ -28,11 +28,21 @@ function App() {
         console.log(values);
         if (Date.now() < values.exp * 1000) {
           setAxiosWithBearer(accessToken);
-          dispatch(userActions.updateIsLoggedIn(true));
+          dispatch(
+            userActions.updateUser({
+              isLoggedIn: true,
+              email: values.email,
+            })
+          );
           console.log('updateIsLoggedIn');
         } else {
           localStorage.removeItem('accessToken');
-          dispatch(userActions.updateIsLoggedIn(false));
+          dispatch(
+            userActions.updateUser({
+              isLoggedIn: false,
+              email: '',
+            })
+          );
           setAxiosWithBearer(REMOVE_ACCESS_TOKEN);
         }
       } catch (err) {
