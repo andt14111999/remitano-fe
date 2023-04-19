@@ -4,11 +4,20 @@ import userEvent from '@testing-library/user-event';
 import { setupStore } from 'stores/store';
 import Share from '.';
 import { sleep } from 'test-utils';
+import { SnackbarProvider } from 'notistack';
 
 describe('Share', () => {
   test('validate input and submit', async () => {
     const user = userEvent.setup();
-    const { container } = renderWithProviders(<Share />);
+    const { container } = renderWithProviders(
+      <SnackbarProvider
+        maxSnack={3}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Share />
+      </SnackbarProvider>
+    );
 
     const signInButton = screen.getByRole('button', { name: 'Share' });
     const videoInput = await screen.findByLabelText(/Youtube URL/i);

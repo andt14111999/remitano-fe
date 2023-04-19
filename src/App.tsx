@@ -88,10 +88,6 @@ function App() {
       maxSnack={3}
       autoHideDuration={2000}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      // content={(key, message) => <CustomSnackbar id={key} message={message} />}
-      // action={(key) => (
-      //   <CustomSnackbarClose id={key} />
-      // )}
     >
       {content}
       <CustomLoader />

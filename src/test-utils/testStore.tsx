@@ -39,16 +39,7 @@ export function renderWithProviders(
     return (
       <HelmetProvider>
         <BrowserRouter>
-          <Provider store={store}>
-            <SnackbarProvider
-              maxSnack={3}
-              autoHideDuration={2000}
-              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            >
-              {children}
-              <CustomLoader />
-            </SnackbarProvider>
-          </Provider>
+          <Provider store={store}>{children}</Provider>
         </BrowserRouter>
       </HelmetProvider>
     );

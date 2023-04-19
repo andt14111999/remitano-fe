@@ -61,7 +61,7 @@ describe('Navbar', () => {
 
     const logoutButton = await screen.findByRole('button', { name: /logout/i });
     await user.click(logoutButton);
-    const isLoggedIn = store.getState().ui.isLoading;
+    const isLoggedIn = store.getState().user.isLoggedIn;
     expect(isLoggedIn).toBeFalsy();
   });
 
@@ -82,7 +82,7 @@ describe('Navbar', () => {
 
     const logoutButton = await screen.findByRole('button', { name: /logout/i });
     await user.click(logoutButton);
-    const isLoggedIn = store.getState().ui.isLoading;
+    const isLoggedIn = store.getState().user.isLoggedIn;
     expect(isLoggedIn).toBe(false);
   });
 });
