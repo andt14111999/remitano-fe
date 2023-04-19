@@ -15,20 +15,24 @@ export interface Video {
 }
 
 const Home = () => {
-
   const [videos, setVideos] = useState<Video[]>([]);
-  const enqueueSnackbar = useEnqueueSnackbar()
+  const enqueueSnackbar = useEnqueueSnackbar();
 
   const getVideos = useCallback(() => {
-    axios.get(APIs.videos).then(res => {
-      setVideos(res.data)
-    }).catch((err) => {
-      enqueueSnackbar("Can't retrieve videos, please contact admin", {variant: 'error'})
-    })
-  }, [enqueueSnackbar])
+    axios
+      .get(APIs.videos)
+      .then((res) => {
+        setVideos(res.data);
+      })
+      .catch((err) => {
+        enqueueSnackbar("Can't retrieve videos, please contact admin", {
+          variant: 'error',
+        });
+      });
+  }, [enqueueSnackbar]);
 
   useEffect(() => {
-    getVideos()
+    getVideos();
   }, [getVideos]);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 lg:gap-16">
@@ -53,7 +57,7 @@ const Home = () => {
         </>
       ))}
       {videos.length === 0 && (
-        <div className="flex justify-center items-center col-span-7">
+        <div className="flex justify-center items-center col-span-7 text-center">
           😊 There are currently no videos shared. Log in to share videos
         </div>
       )}

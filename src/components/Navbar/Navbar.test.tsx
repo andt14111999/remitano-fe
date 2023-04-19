@@ -8,17 +8,27 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { sleep } from 'test-utils';
-import { act } from 'react-dom/test-utils';
+import { setupStore } from 'stores/store';
+
+const loggedInStore = {
+  ui: {
+    isLoading: false,
+    isModalOpen: false,
+  },
+  user: {
+    isLoggedIn: true,
+    email: 'test@gmail.com',
+  },
+};
 
 describe('Navbar', () => {
   test('mobile click on hamburger', async () => {
     const user = userEvent.setup();
-    const { container, unmount } = renderWithProviders(
+    const { unmount } = renderWithProviders(
       <ResponsiveContext.Provider value={{ width: 300 }}>
         <Navbar />
       </ResponsiveContext.Provider>
     );
-    logRoles(container);
     // click on hamburger
     const hamburger = await screen.findByRole('img', { name: /hamburger/i });
     await user.click(hamburger);
@@ -36,6 +46,43 @@ describe('Navbar', () => {
       opacity: 0,
       transform: 'translateX(100%)',
     });
-    unmount();
+  });
+
+  test('logout desktop', async () => {
+    const user = userEvent.setup();
+    const store = setupStore(loggedInStore);
+
+    const { container, unmount } = renderWithProviders(
+      <ResponsiveContext.Provider value={{ width: 1290 }}>
+        <Navbar />
+      </ResponsiveContext.Provider>,
+      { store }
+    );
+
+    const logoutButton = await screen.findByRole('button', { name: /logout/i });
+    await user.click(logoutButton);
+    const isLoggedIn = store.getState().ui.isLoading;
+    expect(isLoggedIn).toBeFalsy();
+  });
+
+  test('logout mobile', async () => {
+    const user = userEvent.setup();
+    const store = setupStore(loggedInStore);
+
+    const { container, unmount } = renderWithProviders(
+      <ResponsiveContext.Provider value={{ width: 400 }}>
+        <Navbar />
+      </ResponsiveContext.Provider>,
+      { store }
+    );
+
+    // click on hamburger
+    const hamburger = await screen.findByRole('img', { name: /hamburger/i });
+    await user.click(hamburger);
+
+    const logoutButton = await screen.findByRole('button', { name: /logout/i });
+    await user.click(logoutButton);
+    const isLoggedIn = store.getState().ui.isLoading;
+    expect(isLoggedIn).toBe(false);
   });
 });

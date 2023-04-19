@@ -1,0 +1,5 @@
+const constants = {
+  TEST_TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwMmFjNTQxNGRmNTUxNmI4MDQzZGQiLCJlbWFpbCI6ImRvMDIwQGdtYWlsLmNvbSIsImlhdCI6MTY4MTkyNjg1MywiZXhwIjoxNjgyMDEzMjUzfQ.q35C-SKk_jp9hUNjMXFBnPC1GR3a2O1mButfIJJbrhE'
+}
+
+export default constants

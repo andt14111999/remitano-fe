@@ -42,7 +42,7 @@ const CustomSnackbar = React.forwardRef<HTMLDivElement, CustomSnackbarProps>(
               <img
                 className="w-8"
                 src={variant && ICONS[variant]}
-                alt="Remitano"
+                alt="Remitano Snackbar"
               />
             </div>
             <div>

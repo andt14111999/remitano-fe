@@ -37,7 +37,6 @@ const validationSchema = Yup.object({
 const Login = () => {
   const enqueueSnackbar = useEnqueueSnackbar();
   const navigate = useNavigate();
-  const location = useLocation();
   const [isInitialized, setIsInitialized] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const dispatch = useAppDispatch();
