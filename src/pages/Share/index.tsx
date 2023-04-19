@@ -32,10 +32,6 @@ const Share = () => {
         .post(APIs.videos, data)
         .then((res) => {
           enqueueSnackbar('Share successfully', { variant: 'success' });
-          const token = res.data;
-          if (token) {
-            localStorage.setItem('accessToken', token);
-          }
         })
         .catch((err) => {
           console.log(err);

@@ -9,6 +9,9 @@ import uiSlice from 'stores/uiSlice';
 import { AppStore, RootState, setupStore } from 'stores/store';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+import CustomModal from 'components/CustomModal';
+import CustomLoader from 'components/CustomLoader';
 
 // As a basic setup, import your same slice reducers
 
@@ -36,7 +39,16 @@ export function renderWithProviders(
     return (
       <HelmetProvider>
         <BrowserRouter>
-          <Provider store={store}>{children}</Provider>
+          <Provider store={store}>
+            <SnackbarProvider
+              maxSnack={3}
+              autoHideDuration={2000}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+              {children}
+              <CustomLoader />
+            </SnackbarProvider>
+          </Provider>
         </BrowserRouter>
       </HelmetProvider>
     );
