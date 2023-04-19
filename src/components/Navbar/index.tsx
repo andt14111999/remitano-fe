@@ -92,7 +92,7 @@ const Navbar = () => {
           {!isDesktop && (
             <img
               src={images.hamburger}
-              alt="Remitano"
+              alt="Remitano Hamburger"
               className="w-[2rem] h-[2rem]"
               onClick={() => {
                 handleOpenSidebar();
@@ -107,6 +107,7 @@ const Navbar = () => {
             <animated.div
               style={animationSidebar}
               className="fixed z-[100000] top-0 left-0 bottom-0 mx-0 px-0"
+              role="menubar"
               // ref={ref}
             >
               <div className="h-full w-full">
@@ -115,14 +116,18 @@ const Navbar = () => {
                     <Link to="#">
                       <img
                         src={images.logo}
-                        alt="Remitano"
-                        className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
+                        alt="Remitano Logo"
+                        className={`md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl ${
+                          !isDesktop && 'cursor-pointer'
+                        }`}
                       />
                     </Link>
                     <img
                       src={images.navbar_close}
-                      alt="Remitano"
-                      className="md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl"
+                      alt="Remitano Navbar Close"
+                      className={`md:w-[4rem] h-[2.5rem] md:h-[3rem] 2xl ${
+                        !isDesktop && 'cursor-pointer'
+                      }`}
                       onClick={() => {
                         handleCloseSidebar();
                       }}

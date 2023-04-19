@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsListing matches the snapshot 1`] = `
+<div>
+  <div
+    class="px-4 py-4 transition-all flex justify-between items-center font-medium border-b border-muted"
+  >
+    <div
+      class="flex items-center gap-12"
+    >
+      <a
+        href="/"
+      >
+        <img
+          alt="Remitano"
+          class="w-[3.25rem] md:w-[4rem]"
+          src="Collect.png"
+        />
+      </a>
+    </div>
+    <div
+      class="flex items-center gap-4 xl:gap-12"
+    >
+      <a
+        href="/login"
+      >
+        <button
+          class="flex justify-center items-center gap-x-[0.625rem] p-2 bg-slate-100 rounded-lg px-4 py-2 border-2 border-fg-default text-fg-default shadow-lg custom-button-shadow "
+          type="button"
+        >
+          <p
+            class=" font-bold"
+          >
+            Login / Register
+          </p>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+`;
