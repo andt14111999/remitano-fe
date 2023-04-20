@@ -70,7 +70,7 @@ const Share = () => {
           onSubmit={formik.handleSubmit}
           noValidate
           sx={{ mt: 1 }}
-          className="min-w-[35rem]"
+          className="w-full md:min-w-[35rem]"
         >
           <TextField
             margin="normal"
