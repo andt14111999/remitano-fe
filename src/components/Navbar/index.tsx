@@ -142,7 +142,13 @@ const Navbar = () => {
                             <p className="italic">Welcome {user.email}</p>
                           )}
                           <Link to="/share">
-                            <CustomButton>Share a movie</CustomButton>
+                            <CustomButton
+                              onClick={() => {
+                                handleCloseSidebar();
+                              }}
+                            >
+                              Share a movie
+                            </CustomButton>
                           </Link>
                           <CustomButton
                             className="custom-button-shadow"
