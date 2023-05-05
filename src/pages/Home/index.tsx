@@ -37,7 +37,7 @@ const Home = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 lg:gap-16">
       {videos.map((video) => (
-        <div key={video._id}>
+        <>
           <div
             className="lg:col-span-3 relative pb-[56.25%] lg:pb-0"
             role="listitem"
@@ -57,7 +57,7 @@ const Home = () => {
             <div className="mb-2 font-medium">Description:</div>
             <ReadMore description={video.description} />
           </div>
-        </div>
+        </>
       ))}
       {videos.length === 0 && (
         <div className="flex justify-center items-center col-span-7 text-center">
